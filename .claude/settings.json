@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cargo fetch >/dev/null 2>&1 && cargo build >/dev/null 2>&1 && echo 'etymology-tui: build ready' || echo 'etymology-tui: build failed (run: cargo build)'"
+          }
+        ]
+      }
+    ]
+  }
+}

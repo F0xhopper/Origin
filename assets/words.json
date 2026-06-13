@@ -1,0 +1,454 @@
+[
+  {
+    "id": "salary",
+    "headword": "Salary",
+    "modern_meaning": "Fixed regular payment for work, typically paid monthly.",
+    "chain": [
+      { "form": "salary", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Fixed periodic wage for employment." },
+      { "form": "salarie", "language": "OldFrench", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Wages, payment for service." },
+      { "form": "salarium", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Soldier's allowance, originally money for salt.", "note": "Roman soldiers were partly paid to buy salt." },
+      { "form": "sal", "language": "Latin", "period": { "label": "Old Latin", "sort_key": -500 }, "meaning": "Salt." },
+      { "form": "*sal-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "Salt." }
+    ]
+  },
+  {
+    "id": "quarantine",
+    "headword": "Quarantine",
+    "modern_meaning": "Isolation period to prevent the spread of disease.",
+    "chain": [
+      { "form": "quarantine", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Enforced isolation to contain contagion." },
+      { "form": "quarantina", "language": "Italian", "period": { "label": "c. 1500 CE", "sort_key": 1500 }, "meaning": "Forty-day isolation of ships at Venice.", "note": "Plague-era ships waited forty days before docking." },
+      { "form": "quaranta", "language": "Italian", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Forty." },
+      { "form": "quadraginta", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Forty." },
+      { "form": "*kwetwores", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "Four." }
+    ]
+  },
+  {
+    "id": "calculate",
+    "headword": "Calculate",
+    "modern_meaning": "To determine a value by mathematical reasoning.",
+    "chain": [
+      { "form": "calculate", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Compute a result." },
+      { "form": "calculatus", "language": "LateLatin", "period": { "label": "c. 400 CE", "sort_key": 400 }, "meaning": "Reckoned, counted." },
+      { "form": "calculus", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Small pebble used for counting.", "note": "Reckoning was done with pebbles on a counting board." },
+      { "form": "calx", "language": "Latin", "period": { "label": "Old Latin", "sort_key": -400 }, "meaning": "Limestone, small stone." }
+    ]
+  },
+  {
+    "id": "muscle",
+    "headword": "Muscle",
+    "modern_meaning": "Body tissue that contracts to produce movement.",
+    "chain": [
+      { "form": "muscle", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Contractile fibrous tissue." },
+      { "form": "muscle", "language": "French", "period": { "label": "c. 1500 CE", "sort_key": 1500 }, "meaning": "Muscle." },
+      { "form": "musculus", "language": "Latin", "period": { "label": "c. 50 BCE", "sort_key": -50 }, "meaning": "Little mouse.", "note": "A flexing muscle was thought to look like a mouse moving under the skin." },
+      { "form": "mus", "language": "Latin", "period": { "label": "Old Latin", "sort_key": -400 }, "meaning": "Mouse." },
+      { "form": "*mus-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "Mouse." }
+    ]
+  },
+  {
+    "id": "candidate",
+    "headword": "Candidate",
+    "modern_meaning": "A person who applies for or is nominated to a position.",
+    "chain": [
+      { "form": "candidate", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "One seeking office or selection." },
+      { "form": "candidatus", "language": "Latin", "period": { "label": "c. 50 BCE", "sort_key": -50 }, "meaning": "Clothed in white.", "note": "Roman office-seekers wore bright white togas." },
+      { "form": "candidus", "language": "Latin", "period": { "label": "Old Latin", "sort_key": -400 }, "meaning": "Shining white." },
+      { "form": "candere", "language": "Latin", "period": { "label": "Old Latin", "sort_key": -450 }, "meaning": "To shine, glow." },
+      { "form": "*kand-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "To shine, be white." }
+    ]
+  },
+  {
+    "id": "companion",
+    "headword": "Companion",
+    "modern_meaning": "A person who accompanies or associates with another.",
+    "chain": [
+      { "form": "companion", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "One who keeps company with another." },
+      { "form": "compaignon", "language": "OldFrench", "period": { "label": "c. 1200 CE", "sort_key": 1200 }, "meaning": "One who shares bread." },
+      { "form": "companio", "language": "LateLatin", "period": { "label": "c. 500 CE", "sort_key": 500 }, "meaning": "One who eats bread with you.", "note": "From com- 'with' + panis 'bread'." },
+      { "form": "panis", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Bread." },
+      { "form": "*pa-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "To feed, protect." }
+    ]
+  },
+  {
+    "id": "disaster",
+    "headword": "Disaster",
+    "modern_meaning": "A sudden event causing great damage or suffering.",
+    "chain": [
+      { "form": "disaster", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "A catastrophe." },
+      { "form": "disastro", "language": "Italian", "period": { "label": "c. 1560 CE", "sort_key": 1560 }, "meaning": "Ill-starred event.", "note": "Literally 'bad star' — misfortune blamed on the stars." },
+      { "form": "astrum", "language": "Latin", "period": { "label": "c. 50 BCE", "sort_key": -50 }, "meaning": "Star." },
+      { "form": "astron", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Star." },
+      { "form": "*ster-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "Star." }
+    ]
+  },
+  {
+    "id": "alphabet",
+    "headword": "Alphabet",
+    "modern_meaning": "The set of letters used to write a language.",
+    "chain": [
+      { "form": "alphabet", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Ordered set of writing symbols." },
+      { "form": "alphabetum", "language": "LateLatin", "period": { "label": "c. 300 CE", "sort_key": 300 }, "meaning": "The letters." },
+      { "form": "alphabetos", "language": "Greek", "period": { "label": "c. 200 BCE", "sort_key": -200 }, "meaning": "Alpha + beta.", "note": "Named for the first two Greek letters." },
+      { "form": "aleph-beth", "language": "Phoenician", "period": { "label": "Phoenician", "sort_key": -1000 }, "meaning": "Ox + house — the first two Phoenician letters." }
+    ]
+  },
+  {
+    "id": "algebra",
+    "headword": "Algebra",
+    "modern_meaning": "Branch of mathematics using symbols for quantities.",
+    "chain": [
+      { "form": "algebra", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Symbolic mathematics." },
+      { "form": "algebra", "language": "LateLatin", "period": { "label": "c. 1500 CE", "sort_key": 1500 }, "meaning": "Reunion of broken parts." },
+      { "form": "al-jabr", "language": "Arabic", "period": { "label": "c. 820 CE", "sort_key": 820 }, "meaning": "The reunion of broken parts.", "note": "From the title of al-Khwarizmi's treatise on equations." }
+    ]
+  },
+  {
+    "id": "assassin",
+    "headword": "Assassin",
+    "modern_meaning": "A person who murders a prominent target.",
+    "chain": [
+      { "form": "assassin", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "A targeted killer." },
+      { "form": "assassino", "language": "Italian", "period": { "label": "c. 1500 CE", "sort_key": 1500 }, "meaning": "Hired killer." },
+      { "form": "hashishin", "language": "Arabic", "period": { "label": "c. 1200 CE", "sort_key": 1200 }, "meaning": "Hashish-users.", "note": "A medieval sect was rumoured to use hashish." },
+      { "form": "hashish", "language": "Arabic", "period": { "label": "c. 1000 CE", "sort_key": 1000 }, "meaning": "Dried hemp." }
+    ]
+  },
+  {
+    "id": "sarcasm",
+    "headword": "Sarcasm",
+    "modern_meaning": "Sharp, mocking irony intended to wound.",
+    "chain": [
+      { "form": "sarcasm", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Cutting ironic remark." },
+      { "form": "sarcasmus", "language": "LateLatin", "period": { "label": "c. 500 CE", "sort_key": 500 }, "meaning": "Sneer, taunt." },
+      { "form": "sarkazein", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "To tear flesh, gnash teeth, speak bitterly.", "note": "From sarx 'flesh' — literally 'to strip off the flesh'." },
+      { "form": "sarx", "language": "Greek", "period": { "label": "c. 600 BCE", "sort_key": -600 }, "meaning": "Flesh." }
+    ]
+  },
+  {
+    "id": "clue",
+    "headword": "Clue",
+    "modern_meaning": "A piece of evidence that helps solve a mystery.",
+    "chain": [
+      { "form": "clue", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Hint toward a solution." },
+      { "form": "clewe", "language": "MiddleEnglish", "period": { "label": "c. 1400 CE", "sort_key": 1400 }, "meaning": "Ball of thread.", "note": "From the thread Theseus used to escape the labyrinth." },
+      { "form": "cliwen", "language": "OldEnglish", "period": { "label": "c. 900 CE", "sort_key": 900 }, "meaning": "Ball of thread or yarn." },
+      { "form": "*gleu-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "To gather into a ball." }
+    ]
+  },
+  {
+    "id": "nice",
+    "headword": "Nice",
+    "modern_meaning": "Pleasant, agreeable, kind.",
+    "chain": [
+      { "form": "nice", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Pleasant and agreeable." },
+      { "form": "nice", "language": "MiddleEnglish", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Foolish, silly.", "note": "The meaning drifted from 'ignorant' to 'precise' to 'pleasant'." },
+      { "form": "nice", "language": "OldFrench", "period": { "label": "c. 1200 CE", "sort_key": 1200 }, "meaning": "Careless, simple." },
+      { "form": "nescius", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Ignorant, not-knowing." },
+      { "form": "*skei-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "To cut, split, distinguish." }
+    ]
+  },
+  {
+    "id": "silly",
+    "headword": "Silly",
+    "modern_meaning": "Foolish, lacking seriousness.",
+    "chain": [
+      { "form": "silly", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Foolish." },
+      { "form": "sely", "language": "MiddleEnglish", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Innocent, harmless, deserving pity.", "note": "Drifted from 'blessed' to 'innocent' to 'foolish'." },
+      { "form": "saelig", "language": "OldEnglish", "period": { "label": "c. 900 CE", "sort_key": 900 }, "meaning": "Happy, blessed, fortunate." },
+      { "form": "*saeligaz", "language": "ProtoGermanic", "period": { "label": "c. 200 CE", "sort_key": 200 }, "meaning": "Blessed, happy." }
+    ]
+  },
+  {
+    "id": "decimate",
+    "headword": "Decimate",
+    "modern_meaning": "To destroy a large proportion of something.",
+    "chain": [
+      { "form": "decimate", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "To devastate." },
+      { "form": "decimatus", "language": "Latin", "period": { "label": "c. 50 BCE", "sort_key": -50 }, "meaning": "To kill every tenth man.", "note": "A Roman army punishment executing one soldier in ten." },
+      { "form": "decem", "language": "Latin", "period": { "label": "Old Latin", "sort_key": -400 }, "meaning": "Ten." },
+      { "form": "*dekm", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "Ten." }
+    ]
+  },
+  {
+    "id": "sinister",
+    "headword": "Sinister",
+    "modern_meaning": "Suggesting evil or harm; ominous.",
+    "chain": [
+      { "form": "sinister", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Threatening, evil-seeming." },
+      { "form": "sinistre", "language": "OldFrench", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Unlucky, on the left." },
+      { "form": "sinister", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Left-hand, and thus unlucky.", "note": "Omens on the left were read as ill-fated." }
+    ]
+  },
+  {
+    "id": "vaccine",
+    "headword": "Vaccine",
+    "modern_meaning": "A preparation that stimulates immunity to a disease.",
+    "chain": [
+      { "form": "vaccine", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Immunizing agent." },
+      { "form": "vaccinus", "language": "Latin", "period": { "label": "c. 1800 CE", "sort_key": 1800 }, "meaning": "Of or from cows.", "note": "Jenner used cowpox to immunize against smallpox." },
+      { "form": "vacca", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Cow." }
+    ]
+  },
+  {
+    "id": "robot",
+    "headword": "Robot",
+    "modern_meaning": "A programmable machine that performs tasks.",
+    "chain": [
+      { "form": "robot", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Automated machine." },
+      { "form": "robot", "language": "Czech", "period": { "label": "Czech, 1920 CE", "sort_key": 1920 }, "meaning": "Artificial worker.", "note": "Coined in Karel Capek's play R.U.R." },
+      { "form": "robota", "language": "Old Czech", "period": { "label": "Old Czech", "sort_key": 1500 }, "meaning": "Forced labour, drudgery." }
+    ]
+  },
+  {
+    "id": "denim",
+    "headword": "Denim",
+    "modern_meaning": "Sturdy cotton twill fabric used for jeans.",
+    "chain": [
+      { "form": "denim", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Durable cotton fabric." },
+      { "form": "de Nimes", "language": "French", "period": { "label": "c. 1700 CE", "sort_key": 1700 }, "meaning": "Serge from Nimes.", "note": "Named for the French city of Nimes where it was made." },
+      { "form": "Nemausus", "language": "Latin", "period": { "label": "Roman era", "sort_key": 100 }, "meaning": "The town of Nimes." }
+    ]
+  },
+  {
+    "id": "ketchup",
+    "headword": "Ketchup",
+    "modern_meaning": "A spiced tomato-based table sauce.",
+    "chain": [
+      { "form": "ketchup", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Tomato condiment." },
+      { "form": "kechap", "language": "Malay", "period": { "label": "Malay, c. 1700 CE", "sort_key": 1700 }, "meaning": "Fish sauce." },
+      { "form": "ke-tsiap", "language": "Hokkien Chinese", "period": { "label": "Hokkien Chinese", "sort_key": 1600 }, "meaning": "Brine of pickled fish.", "note": "Originally a fermented fish sauce, not tomato-based." }
+    ]
+  },
+  {
+    "id": "tsunami",
+    "headword": "Tsunami",
+    "modern_meaning": "A large ocean wave caused by seismic activity.",
+    "chain": [
+      { "form": "tsunami", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Seismic sea wave." },
+      { "form": "tsunami", "language": "Japanese", "period": { "label": "Japanese", "sort_key": 1900 }, "meaning": "Harbour wave.", "note": "From tsu 'harbour' + nami 'wave'." }
+    ]
+  },
+  {
+    "id": "avatar",
+    "headword": "Avatar",
+    "modern_meaning": "A digital representation of a person.",
+    "chain": [
+      { "form": "avatar", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Online persona or icon." },
+      { "form": "avatara", "language": "Sanskrit", "period": { "label": "ancient", "sort_key": -1000 }, "meaning": "Descent of a deity into earthly form.", "note": "A god 'crossing down' into the mortal world." }
+    ]
+  },
+  {
+    "id": "juggernaut",
+    "headword": "Juggernaut",
+    "modern_meaning": "An unstoppable, overwhelming force.",
+    "chain": [
+      { "form": "juggernaut", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Crushing, unstoppable force." },
+      { "form": "Jagannath", "language": "Sanskrit", "period": { "label": "ancient", "sort_key": -500 }, "meaning": "Lord of the world.", "note": "From a temple deity whose great chariot reputedly crushed devotees." }
+    ]
+  },
+  {
+    "id": "sabotage",
+    "headword": "Sabotage",
+    "modern_meaning": "Deliberate destruction or obstruction.",
+    "chain": [
+      { "form": "sabotage", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Intentional disruption." },
+      { "form": "sabotage", "language": "French", "period": { "label": "c. 1900 CE", "sort_key": 1900 }, "meaning": "Willful damage by workers.", "note": "Linked to sabots, the wooden shoes of workers." },
+      { "form": "sabot", "language": "French", "period": { "label": "c. 1600 CE", "sort_key": 1600 }, "meaning": "Wooden shoe." }
+    ]
+  },
+  {
+    "id": "galaxy",
+    "headword": "Galaxy",
+    "modern_meaning": "A vast system of stars bound by gravity.",
+    "chain": [
+      { "form": "galaxy", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Star system." },
+      { "form": "galaxias", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Milky circle.", "note": "The Milky Way, from gala 'milk'." },
+      { "form": "gala", "language": "Greek", "period": { "label": "c. 600 BCE", "sort_key": -600 }, "meaning": "Milk." },
+      { "form": "*glakt-", "language": "ProtoIndoEuropean", "period": { "label": "PIE root", "sort_key": -4500 }, "meaning": "Milk." }
+    ]
+  },
+  {
+    "id": "planet",
+    "headword": "Planet",
+    "modern_meaning": "A celestial body orbiting a star.",
+    "chain": [
+      { "form": "planet", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Body orbiting a star." },
+      { "form": "planete", "language": "OldFrench", "period": { "label": "c. 1200 CE", "sort_key": 1200 }, "meaning": "Wandering star." },
+      { "form": "planetes", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Wanderer.", "note": "Planets 'wandered' against the fixed stars." },
+      { "form": "planasthai", "language": "Greek", "period": { "label": "c. 600 BCE", "sort_key": -600 }, "meaning": "To wander, stray." }
+    ]
+  },
+  {
+    "id": "museum",
+    "headword": "Museum",
+    "modern_meaning": "A building where objects of value are displayed.",
+    "chain": [
+      { "form": "museum", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Institution displaying artifacts." },
+      { "form": "museum", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Library or study." },
+      { "form": "mouseion", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Seat of the Muses.", "note": "A place dedicated to the nine Muses of the arts." },
+      { "form": "Mousa", "language": "Greek", "period": { "label": "c. 700 BCE", "sort_key": -700 }, "meaning": "Muse, goddess of art." }
+    ]
+  },
+  {
+    "id": "school",
+    "headword": "School",
+    "modern_meaning": "An institution for educating children.",
+    "chain": [
+      { "form": "school", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Place of learning." },
+      { "form": "scole", "language": "OldEnglish", "period": { "label": "c. 1000 CE", "sort_key": 1000 }, "meaning": "Place of instruction." },
+      { "form": "schola", "language": "Latin", "period": { "label": "c. 100 BCE", "sort_key": -100 }, "meaning": "Learned discussion, lecture." },
+      { "form": "schole", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Leisure, free time.", "note": "Learning was the noble use of leisure." }
+    ]
+  },
+  {
+    "id": "dinosaur",
+    "headword": "Dinosaur",
+    "modern_meaning": "An extinct reptile of the Mesozoic era.",
+    "chain": [
+      { "form": "dinosaur", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Prehistoric reptile." },
+      { "form": "Dinosauria", "language": "LateLatin", "period": { "label": "1842 CE", "sort_key": 1842 }, "meaning": "Terrible lizards.", "note": "Coined by Richard Owen from Greek roots." },
+      { "form": "deinos", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Terrible, fearfully great." },
+      { "form": "sauros", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -410 }, "meaning": "Lizard." }
+    ]
+  },
+  {
+    "id": "philosophy",
+    "headword": "Philosophy",
+    "modern_meaning": "The study of fundamental questions of existence.",
+    "chain": [
+      { "form": "philosophy", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Study of knowledge and existence." },
+      { "form": "philosophia", "language": "Latin", "period": { "label": "c. 50 BCE", "sort_key": -50 }, "meaning": "Love of wisdom." },
+      { "form": "philosophia", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Love of wisdom.", "note": "From philos 'loving' + sophia 'wisdom'." },
+      { "form": "sophia", "language": "Greek", "period": { "label": "c. 700 BCE", "sort_key": -700 }, "meaning": "Wisdom, skill." }
+    ]
+  },
+  {
+    "id": "democracy",
+    "headword": "Democracy",
+    "modern_meaning": "Government by the people, usually through voting.",
+    "chain": [
+      { "form": "democracy", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Rule by the people." },
+      { "form": "democratie", "language": "OldFrench", "period": { "label": "c. 1400 CE", "sort_key": 1400 }, "meaning": "Popular government." },
+      { "form": "demokratia", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "Rule of the people.", "note": "From demos 'people' + kratos 'power'." },
+      { "form": "demos", "language": "Greek", "period": { "label": "c. 700 BCE", "sort_key": -700 }, "meaning": "Common people, district." }
+    ]
+  },
+  {
+    "id": "hippopotamus",
+    "headword": "Hippopotamus",
+    "modern_meaning": "A large semi-aquatic African mammal.",
+    "chain": [
+      { "form": "hippopotamus", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "River-dwelling herbivore." },
+      { "form": "hippopotamus", "language": "Latin", "period": { "label": "c. 50 CE", "sort_key": 50 }, "meaning": "River horse." },
+      { "form": "hippopotamos", "language": "Greek", "period": { "label": "c. 400 BCE", "sort_key": -400 }, "meaning": "River horse.", "note": "From hippos 'horse' + potamos 'river'." },
+      { "form": "hippos", "language": "Greek", "period": { "label": "c. 700 BCE", "sort_key": -700 }, "meaning": "Horse." }
+    ]
+  },
+  {
+    "id": "whisky",
+    "headword": "Whisky",
+    "modern_meaning": "A distilled spirit made from fermented grain.",
+    "chain": [
+      { "form": "whisky", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Grain spirit." },
+      { "form": "usquebaugh", "language": "Gaelic", "period": { "label": "Gaelic, c. 1600 CE", "sort_key": 1600 }, "meaning": "Water of life." },
+      { "form": "uisce beatha", "language": "Old Irish", "period": { "label": "Old Irish", "sort_key": 1100 }, "meaning": "Water of life.", "note": "A calque of the Latin aqua vitae." }
+    ]
+  },
+  {
+    "id": "cappuccino",
+    "headword": "Cappuccino",
+    "modern_meaning": "Espresso coffee with steamed, foamed milk.",
+    "chain": [
+      { "form": "cappuccino", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Frothy milk coffee." },
+      { "form": "cappuccino", "language": "Italian", "period": { "label": "c. 1900 CE", "sort_key": 1900 }, "meaning": "Little hood.", "note": "Its colour resembled the brown robes of Capuchin friars." },
+      { "form": "cappuccio", "language": "Italian", "period": { "label": "c. 1500 CE", "sort_key": 1500 }, "meaning": "Hood, cowl." },
+      { "form": "cappa", "language": "LateLatin", "period": { "label": "c. 600 CE", "sort_key": 600 }, "meaning": "Cape, hooded cloak." }
+    ]
+  },
+  {
+    "id": "magazine",
+    "headword": "Magazine",
+    "modern_meaning": "A periodical publication, or a store of ammunition.",
+    "chain": [
+      { "form": "magazine", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Periodical or store." },
+      { "form": "magasin", "language": "French", "period": { "label": "c. 1600 CE", "sort_key": 1600 }, "meaning": "Warehouse, storehouse." },
+      { "form": "makhazin", "language": "Arabic", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Storehouses.", "note": "A magazine 'stores up' articles like a warehouse." },
+      { "form": "khazana", "language": "Arabic", "period": { "label": "c. 1000 CE", "sort_key": 1000 }, "meaning": "To store up." }
+    ]
+  },
+  {
+    "id": "sofa",
+    "headword": "Sofa",
+    "modern_meaning": "A long upholstered seat for several people.",
+    "chain": [
+      { "form": "sofa", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Upholstered couch." },
+      { "form": "sofa", "language": "French", "period": { "label": "c. 1600 CE", "sort_key": 1600 }, "meaning": "Raised cushioned seat." },
+      { "form": "suffah", "language": "Arabic", "period": { "label": "c. 1000 CE", "sort_key": 1000 }, "meaning": "Bench, raised platform with cushions." }
+    ]
+  },
+  {
+    "id": "candy",
+    "headword": "Candy",
+    "modern_meaning": "A sweet confection made with sugar.",
+    "chain": [
+      { "form": "candy", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Sugar sweet." },
+      { "form": "sucre candi", "language": "OldFrench", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Crystallized sugar." },
+      { "form": "qandi", "language": "Arabic", "period": { "label": "c. 1100 CE", "sort_key": 1100 }, "meaning": "Made of sugar." },
+      { "form": "khanda", "language": "Sanskrit", "period": { "label": "ancient", "sort_key": -500 }, "meaning": "A piece of sugar.", "note": "Sugar travelled west from India along the trade routes." }
+    ]
+  },
+  {
+    "id": "lemon",
+    "headword": "Lemon",
+    "modern_meaning": "A yellow citrus fruit with sour juice.",
+    "chain": [
+      { "form": "lemon", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Sour citrus fruit." },
+      { "form": "limon", "language": "OldFrench", "period": { "label": "c. 1400 CE", "sort_key": 1400 }, "meaning": "Citrus fruit." },
+      { "form": "limun", "language": "Arabic", "period": { "label": "c. 1100 CE", "sort_key": 1100 }, "meaning": "Citrus fruit." },
+      { "form": "limu", "language": "Persian", "period": { "label": "Persian", "sort_key": 900 }, "meaning": "Citrus fruit." }
+    ]
+  },
+  {
+    "id": "orange",
+    "headword": "Orange",
+    "modern_meaning": "A round citrus fruit, or the colour of it.",
+    "chain": [
+      { "form": "orange", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Citrus fruit and colour." },
+      { "form": "orenge", "language": "OldFrench", "period": { "label": "c. 1300 CE", "sort_key": 1300 }, "meaning": "Orange fruit.", "note": "The initial n- was lost: 'a norange' became 'an orange'." },
+      { "form": "naranj", "language": "Arabic", "period": { "label": "c. 1000 CE", "sort_key": 1000 }, "meaning": "Bitter orange." },
+      { "form": "naranga", "language": "Sanskrit", "period": { "label": "ancient", "sort_key": -700 }, "meaning": "Orange tree." }
+    ]
+  },
+  {
+    "id": "zero",
+    "headword": "Zero",
+    "modern_meaning": "The numerical value of nothing; naught.",
+    "chain": [
+      { "form": "zero", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "The number nought." },
+      { "form": "zero", "language": "Italian", "period": { "label": "c. 1500 CE", "sort_key": 1500 }, "meaning": "Cipher, nought." },
+      { "form": "sifr", "language": "Arabic", "period": { "label": "c. 900 CE", "sort_key": 900 }, "meaning": "Empty, cipher.", "note": "A translation of the Sanskrit idea of the void." },
+      { "form": "sunya", "language": "Sanskrit", "period": { "label": "ancient", "sort_key": -300 }, "meaning": "Empty, void." }
+    ]
+  },
+  {
+    "id": "berserk",
+    "headword": "Berserk",
+    "modern_meaning": "Out of control with anger or excitement.",
+    "chain": [
+      { "form": "berserk", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Wildly violent or frenzied." },
+      { "form": "berserkr", "language": "OldNorse", "period": { "label": "c. 1000 CE", "sort_key": 1000 }, "meaning": "Frenzied Norse warrior.", "note": "From 'bear-shirt' — warriors who fought in a wild trance." },
+      { "form": "bera serkr", "language": "OldNorse", "period": { "label": "c. 800 CE", "sort_key": 800 }, "meaning": "Bear shirt." }
+    ]
+  },
+  {
+    "id": "window",
+    "headword": "Window",
+    "modern_meaning": "An opening in a wall fitted with glass.",
+    "chain": [
+      { "form": "window", "language": "English", "period": { "label": "modern", "sort_key": 2000 }, "meaning": "Glazed opening for light." },
+      { "form": "vindauga", "language": "OldNorse", "period": { "label": "c. 1200 CE", "sort_key": 1200 }, "meaning": "Wind eye.", "note": "An opening that let in air, from vindr 'wind' + auga 'eye'." },
+      { "form": "vindr", "language": "OldNorse", "period": { "label": "c. 900 CE", "sort_key": 900 }, "meaning": "Wind." }
+    ]
+  }
+]
