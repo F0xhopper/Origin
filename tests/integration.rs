@@ -1,76 +1,43 @@
 //! End-to-end exercises of the public API, driving the app via actions only.
 
-use etymology_tui::app::{App, Mode};
+use etymology_tui::app::App;
 use etymology_tui::input::Action;
 use etymology_tui::model::Dataset;
 
-fn app() -> App {
-    App::new(Dataset::embedded().expect("embedded dataset"))
+fn app_for(query: &str) -> App {
+    let ds = Dataset::embedded().expect("embedded dataset");
+    let idx = ds.resolve(query).expect("query resolves");
+    App::new(ds.get(idx).unwrap().clone())
 }
 
 #[test]
-fn reverse_dive_session_accumulates_discovery() {
-    let mut a = app();
+fn walks_back_to_the_root_and_returns() {
+    let mut a = app_for("salary");
+    assert_eq!(a.stage_cursor, 0, "starts at the modern form");
 
-    // Open the first word and dive to its oldest root.
-    a.update(Action::Open);
-    assert_eq!(a.mode, Mode::Inspect);
-    a.update(Action::JumpStart); // gg -> oldest origin
-    let depth = a.open().unwrap().depth();
-    assert_eq!(a.stage_cursor, depth - 1);
+    a.update(Action::JumpRoot);
+    assert_eq!(a.stage_cursor, a.depth() - 1);
+    let root = a.word.deepest_period().sort_key;
+    assert_eq!(a.word.chain[a.stage_cursor].period.sort_key, root);
 
-    // Back out and explore a second word.
-    a.update(Action::Back);
-    a.update(Action::Move(1));
-    a.update(Action::Open);
-
-    assert_eq!(a.stats.words_explored(), 2);
-    assert!(a.stats.languages_count() >= 2);
-    assert!(a.stats.deepest().is_some());
-}
-
-#[test]
-fn discovery_mode_browses_without_opening() {
-    let mut a = app();
-    let last = a.filtered.len() - 1;
-    a.update(Action::JumpEnd);
-    assert_eq!(a.list_cursor, last);
-    assert_eq!(a.mode, Mode::Navigation);
-    // Browsing alone explores nothing.
-    assert_eq!(a.stats.words_explored(), 0);
-}
-
-#[test]
-fn deep_origin_then_compare_forward() {
-    let mut a = app();
-    a.update(Action::Open);
-    a.update(Action::JumpStart); // deepest
-    let deepest = a.open().unwrap().deepest_period().sort_key;
-    assert_eq!(
-        a.open().unwrap().chain[a.stage_cursor].period.sort_key,
-        deepest
-    );
-    a.update(Action::JumpEnd); // back to modern
+    a.update(Action::JumpModern);
     assert_eq!(a.stage_cursor, 0);
 }
 
 #[test]
-fn random_opens_some_word() {
-    let mut a = app();
-    a.update(Action::Random);
-    assert_eq!(a.mode, Mode::Inspect);
-    assert!(a.open().is_some());
+fn stepping_clamps_at_both_ends() {
+    let mut a = app_for("salary");
+    a.update(Action::Move(-3));
+    assert_eq!(a.stage_cursor, 0);
+    a.update(Action::Move(1000));
+    assert_eq!(a.stage_cursor, a.depth() - 1);
 }
 
 #[test]
-fn search_then_clear_restores_all() {
-    let mut a = app();
-    let total = a.filtered.len();
-    a.update(Action::SearchStart);
-    for c in "zzzznotaword".chars() {
-        a.update(Action::SearchInput(c));
-    }
-    assert!(a.filtered.is_empty());
-    a.update(Action::SearchCancel);
-    assert_eq!(a.filtered.len(), total);
+fn resolution_picks_the_right_word() {
+    let ds = Dataset::embedded().unwrap();
+    let by_id = ds.resolve("salary").unwrap();
+    let by_headword = ds.resolve("Salary").unwrap();
+    assert_eq!(by_id, by_headword);
+    assert!(ds.resolve("zzzznotaword").is_none());
 }

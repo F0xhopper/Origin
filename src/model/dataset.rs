@@ -87,6 +87,32 @@ impl Dataset {
         self.words.iter().position(|w| w.id.to_lowercase() == id)
     }
 
+    /// Find a word index by its headword (case-insensitive).
+    pub fn index_of_headword(&self, name: &str) -> Option<usize> {
+        let name = name.trim().to_lowercase();
+        self.words
+            .iter()
+            .position(|w| w.headword.to_lowercase() == name)
+    }
+
+    /// Resolve a user-typed query to a single word.
+    ///
+    /// Tries, in order: an exact id match, an exact headword match, then a
+    /// unique substring match. Returns `None` when nothing matches or the
+    /// match is ambiguous (use [`Dataset::search`] for suggestions).
+    pub fn resolve(&self, query: &str) -> Option<usize> {
+        let q = query.trim();
+        if q.is_empty() {
+            return None;
+        }
+        self.index_of_id(q)
+            .or_else(|| self.index_of_headword(q))
+            .or_else(|| {
+                let hits = self.search(q);
+                (hits.len() == 1).then(|| hits[0])
+            })
+    }
+
     /// Indices of words whose headword or id contains `query` (case-insensitive).
     /// An empty query matches everything.
     pub fn search(&self, query: &str) -> Vec<usize> {
@@ -138,6 +164,17 @@ mod tests {
             hits.iter().any(|&i| ds.get(i).unwrap().id == "salary"),
             "expected salary in results for 'SAL'"
         );
+    }
+
+    #[test]
+    fn resolve_matches_id_headword_and_unique_substring() {
+        let ds = Dataset::embedded().unwrap();
+        let salary = ds.index_of_id("salary").unwrap();
+        assert_eq!(ds.resolve("salary"), Some(salary));
+        assert_eq!(ds.resolve("Salary"), Some(salary)); // headword, case-insensitive
+        assert_eq!(ds.resolve("salar"), Some(salary)); // unique substring
+        assert_eq!(ds.resolve("zzzznotaword"), None); // no match
+        assert_eq!(ds.resolve(""), None); // empty
     }
 
     #[test]
