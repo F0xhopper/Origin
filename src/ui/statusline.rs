@@ -1,4 +1,4 @@
-//! Top status line: mode indicator, pending chord/count, search, key hints.
+//! Top status line: app badge, autoplay/pending indicators, and key hints.
 
 use ratatui::layout::Rect;
 use ratatui::style::{Modifier, Style};
@@ -6,16 +6,16 @@ use ratatui::text::{Line, Span};
 use ratatui::widgets::Paragraph;
 use ratatui::Frame;
 
-use crate::app::{App, Mode, Overlay};
+use crate::app::{App, Overlay};
 use crate::ui::theme;
 
 /// Draw the status line across the given (1-row) area.
 pub fn draw(f: &mut Frame, app: &App, area: Rect) {
     let mut spans: Vec<Span> = Vec::new();
 
-    // Mode badge.
+    // App badge.
     spans.push(Span::styled(
-        format!(" {} ", app.mode.label()),
+        " ORIGIN ",
         Style::default()
             .fg(theme::GOLD_BRIGHT)
             .bg(theme::ACTIVE_BG)
@@ -38,30 +38,10 @@ pub fn draw(f: &mut Frame, app: &App, area: Rect) {
         spans.push(Span::styled(" g", theme::dim()));
     }
 
-    // Active search query.
-    if app.overlay == Overlay::Search {
-        spans.push(Span::styled(
-            format!("  /{}", app.search_query),
-            Style::default().fg(theme::GOLD_BRIGHT),
-        ));
-        spans.push(Span::styled("█", Style::default().fg(theme::GOLD_BRIGHT)));
-    } else if !app.search_query.is_empty() {
-        spans.push(Span::styled(
-            format!("  filter:/{}", app.search_query),
-            theme::dim(),
-        ));
-    }
-
     // Right-aligned context hint.
-    let hint = match (app.overlay, app.mode) {
-        (Overlay::Search, _) => "type to filter  Enter:keep  Esc:cancel",
-        (Overlay::Help, _) => "?/Esc:close",
-        (Overlay::None, Mode::Navigation) => {
-            "j/k:move  Enter:dive  /:search  r:random  ?:help  q:quit"
-        }
-        (Overlay::None, Mode::Inspect) => {
-            "h:older  l:newer  gg:root  G:modern  Space:play  Esc:back"
-        }
+    let hint = match app.overlay {
+        Overlay::Help => "?/Esc:close",
+        Overlay::None => "h:newer  l:older  gg:modern  G:root  Space:play  ?:help  q:quit",
     };
 
     let used: usize = spans.iter().map(|s| s.content.chars().count()).sum();

@@ -8,22 +8,15 @@ use ratatui::Frame;
 use crate::ui::theme;
 
 const ROWS: &[(&str, &str)] = &[
-    ("j / k", "move through the word list"),
-    ("Enter / l", "open the selected word's timeline"),
-    ("Esc", "return to the word list"),
-    ("h", "go deeper into history (older form)"),
-    ("l", "return toward the modern form"),
-    ("gg", "jump to the oldest origin"),
-    ("G", "jump to the modern word"),
+    ("l / →", "step back in time (older form)"),
+    ("h / ←", "step forward (newer form)"),
+    ("gg / 0", "jump to the modern word"),
+    ("G / $", "jump to the oldest root"),
     ("Space", "play / pause backward auto-traversal"),
-    ("/", "search & filter words"),
-    ("n / N", "cycle through search matches"),
-    ("r", "open a random word"),
-    ("s", "toggle stats focus"),
-    ("3j", "numeric counts repeat a motion"),
-    ("mouse", "click a word or stage, scroll to navigate"),
+    ("3l", "numeric counts repeat a motion"),
+    ("mouse", "click a node, scroll to navigate"),
     ("?", "toggle this help"),
-    ("q", "quit"),
+    ("q / Esc", "quit"),
 ];
 
 /// Draw the help overlay centered on screen.

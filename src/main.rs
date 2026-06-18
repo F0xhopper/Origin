@@ -1,5 +1,7 @@
-//! Reverse Etymology Timeline TUI — a terminal linguistic time machine.
+//! `origin` — a terminal linguistic time machine. Run `origin <word>` to trace
+//! a word backward through history along a horizontal, vim-navigable tree.
 
+use std::process::ExitCode;
 use std::time::Duration;
 
 use anyhow::{Context, Result};
@@ -8,30 +10,53 @@ use crossterm::event::{self, Event, KeyEventKind};
 
 use etymology_tui::app::App;
 use etymology_tui::cli::Cli;
-use etymology_tui::input::{map_key, Action};
+use etymology_tui::input::map_key;
 use etymology_tui::model::Dataset;
 use etymology_tui::tui::{self, Tui};
 use etymology_tui::ui;
 
-/// How long to wait for input before redrawing (keeps the clock & autoplay live).
+/// How long to wait for input before redrawing (keeps autoplay live).
 const POLL: Duration = Duration::from_millis(200);
 
-fn main() -> Result<()> {
+fn main() -> ExitCode {
+    match try_main() {
+        Ok(code) => code,
+        Err(err) => {
+            eprintln!("origin: {err:#}");
+            ExitCode::FAILURE
+        }
+    }
+}
+
+fn try_main() -> Result<ExitCode> {
     let cli = Cli::parse();
     init_logging(&cli)?;
 
     let dataset = Dataset::load(cli.data.as_deref()).context("loading dataset")?;
-    let mut app = App::new(dataset);
-    apply_startup(&mut app, &cli);
+
+    // No word given: print usage-style guidance and exit.
+    let Some(query) = cli.word.as_deref() else {
+        eprintln!("usage: origin <word>");
+        eprintln!("       e.g. `origin salary` to trace a word's etymology.");
+        return Ok(ExitCode::from(2));
+    };
+
+    // Resolve the word, or suggest near matches and exit.
+    let Some(idx) = dataset.resolve(query) else {
+        report_not_found(&dataset, query);
+        return Ok(ExitCode::FAILURE);
+    };
+
+    let word = dataset.get(idx).expect("resolved index is valid").clone();
+    let mut app = App::new(word);
 
     let mouse = !cli.no_mouse;
     tui::install_panic_hook(mouse);
-
     let mut tui = Tui::enter(mouse).context("entering terminal")?;
     let result = run(&mut tui, &mut app);
     // `tui` restores the terminal on drop here, before any error is printed.
     drop(tui);
-    result
+    result.map(|()| ExitCode::SUCCESS)
 }
 
 /// The main event/render loop.
@@ -42,7 +67,7 @@ fn run(tui: &mut Tui, app: &mut App) -> Result<()> {
         if event::poll(POLL)? {
             match event::read()? {
                 Event::Key(key) if key.kind == KeyEventKind::Press => {
-                    if let Some(action) = map_key(app.mode, app.overlay, key, &mut app.pending) {
+                    if let Some(action) = map_key(app.overlay, key, &mut app.pending) {
                         app.update(action);
                     }
                 }
@@ -57,17 +82,22 @@ fn run(tui: &mut Tui, app: &mut App) -> Result<()> {
     Ok(())
 }
 
-/// Honour `--word` / `--random` startup options.
-fn apply_startup(app: &mut App, cli: &Cli) {
-    if let Some(id) = &cli.word {
-        if let Some(idx) = app.dataset.index_of_id(id) {
-            if let Some(pos) = app.filtered.iter().position(|&i| i == idx) {
-                app.list_cursor = pos;
-            }
-            app.update(Action::Open);
-        }
-    } else if cli.random {
-        app.update(Action::Random);
+/// Tell the user the word wasn't found and offer close matches.
+fn report_not_found(dataset: &Dataset, query: &str) {
+    eprintln!("origin: no word matching \"{query}\".");
+    let suggestions: Vec<&str> = dataset
+        .search(query)
+        .into_iter()
+        .filter_map(|i| dataset.get(i).map(|w| w.headword.as_str()))
+        .take(6)
+        .collect();
+    if !suggestions.is_empty() {
+        eprintln!("did you mean: {}?", suggestions.join(", "));
+    } else {
+        eprintln!(
+            "try `origin salary` — the dataset covers {} words.",
+            dataset.len()
+        );
     }
 }
 

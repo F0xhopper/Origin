@@ -1,53 +1,58 @@
-# Reverse Etymology Timeline TUI
+# origin
 
-A terminal app for exploring word origins. Start at a modern English word and
-step backward through history — older spellings, earlier meanings, and the
-languages it passed through — until you reach its ancient root.
-
-Navigation is Vim-style: words are a list you move through, and each word's
-history is a timeline you walk back in time.
+A terminal time machine for word origins. Run `origin <word>` and it opens a
+**horizontal etymology tree** for that word — modern form on the left, ancient
+root on the right — that you walk back through time with Vim-style keys.
 
 ```
-┌──────────────────────────────────────────────────────────────────────────┐
-│ INSPECT   /sal                       h:older l:newer gg:root G:modern ?help │
-├────────────┬────────────────────────────────────────────┬─────────────────┤
-│ Words      │ Reverse Timeline                            │ Stage           │
-│ > Salary   │ > salary       English · modern             │ Form: salarium  │
-│   School   │   salarie      Old French · c. 1300 CE       │ Language: Latin │
-│   Sofa     │   salarium     Latin · c. 100 BCE            │ Period: c.100BCE│
-│   Zero     │   sal          Latin · Old Latin             │ Meaning: salt   │
-│            │   *sal-        Proto-Indo-European · root    │ allowance       │
-└────────────┴────────────────────────────────────────────┴─────────────────┘
+ ORIGIN                   h:newer  l:older  gg:modern  G:root  Space:play  ?:help  q:quit
+┌ Salary ───────────────────────────────────────────────────────────────────────────────┐
+│                                                                                         │
+│  ╭────────╮     ╭────────╮     ╭────────╮     ╭────────╮     ╭────────╮                 │
+│  │ salary │ ──▶ │salarie │ ──▶ │salarium│ ──▶ │  sal   │ ──▶ │ *sal-  │                 │
+│  ╰────────╯     ╰────────╯     ╰────────╯     ╰────────╯     ╰────────╯                 │
+│   English       OldFrench        Latin          Latin        Proto-IE                   │
+│    modern       c. 1300 CE     c. 100 BCE     Old Latin       PIE root                  │
+│                                                                                         │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+┌ Stage ────────────────────────────────────────────────────────────────────────────────┐
+│ Form: salarium    Language: Latin    Period: c. 100 BCE                                  │
+│ Meaning  Soldier's allowance, originally money for salt.                                 │
+│ stage 3/5                                                                                │
+└─────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Run
 
 ```sh
-cargo run --release
+origin salary          # trace a word's etymology
+cargo run -- salary    # from a checkout
 ```
+
+Running with no word prints usage; an unknown word prints close matches and
+exits.
 
 ### Options
 
 | Flag             | Description                                  |
 |------------------|----------------------------------------------|
 | `--data <PATH>`  | Load an external `words.json` dataset.       |
-| `--word <ID>`    | Open directly into a word's timeline (by id).|
-| `--random`       | Start on a random word.                      |
 | `--no-mouse`     | Disable mouse capture.                        |
 | `--log <PATH>`   | Write logs to a file.                         |
 
 ## Controls
 
-| Context     | Keys                                                           |
-|-------------|---------------------------------------------------------------|
-| Navigation  | `j`/`k` move, `Enter`/`l` open, `gg`/`G` first/last            |
-| Inspect     | `h` older, `l` newer, `gg` root, `G` modern, `Space` autoplay, `Esc` back |
-| Search      | `/` start, type to filter, `Enter` keep, `Esc` cancel, `n`/`N` cycle |
-| Global      | `r` random, `s` stats, `?` help, `q` quit, `3j` numeric counts |
-| Mouse       | click a word or stage, scroll to navigate                     |
-
-The session stats panel tracks words explored, layers visited, languages
-encountered, deepest point reached, and session time.
+| Keys                | Action                                          |
+|---------------------|-------------------------------------------------|
+| `l` / `→`           | step back in time (older form)                  |
+| `h` / `←`           | step forward (newer form)                       |
+| `gg` / `0`          | jump to the modern word                         |
+| `G` / `$`           | jump to the oldest root                         |
+| `Space`             | play / pause backward auto-traversal            |
+| `3l`                | numeric counts repeat a motion                  |
+| mouse               | click a node, scroll to navigate                |
+| `?`                 | toggle help                                     |
+| `q` / `Esc`         | quit                                            |
 
 ## Data format
 
@@ -75,13 +80,12 @@ A full dataset is embedded in the binary, so the file is optional.
 
 ```
 src/
-  model/   domain types and dataset loading
+  model/   domain types, dataset loading and word resolution
   input/   Action intents and the Vim keymap
   app.rs   state machine: update(Action) drives all state
-  stats.rs session stats
-  ui/      ratatui rendering
+  ui/      ratatui rendering (tree, detail, status, help)
   tui.rs   terminal setup, teardown, panic safety
-  main.rs  argument parsing and the event loop
+  main.rs  argument parsing, word resolution and the event loop
 ```
 
 Keys and mouse events become `Action` values, and `App::update` is the single

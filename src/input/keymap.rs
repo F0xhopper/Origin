@@ -1,15 +1,15 @@
-//! Vim-style modal key translation. Pure function over the current mode,
-//! overlay and a small amount of pending chord/count state.
+//! Vim-style key translation. A pure function over the current overlay and a
+//! small amount of pending chord/count state.
 
 use crossterm::event::{KeyCode, KeyEvent, KeyModifiers};
 
-use crate::app::{Mode, Overlay};
+use crate::app::Overlay;
 use crate::input::action::Action;
 
 /// Transient multi-key state: numeric count prefix and the `g` of a `gg` chord.
 #[derive(Debug, Default, Clone, PartialEq, Eq)]
 pub struct Pending {
-    /// Accumulated numeric prefix, e.g. `3` for `3j`.
+    /// Accumulated numeric prefix, e.g. `3` for `3l`.
     pub count: Option<u32>,
     /// True after the first `g` of a `gg` chord.
     pub g: bool,
@@ -32,19 +32,10 @@ impl Pending {
 /// Translate a key event into an [`Action`], updating `pending` for chords and
 /// counts. Returns `None` when the key only mutated pending state (e.g. a digit
 /// or the first `g`) or is unbound in the current context.
-pub fn map_key(
-    mode: Mode,
-    overlay: Overlay,
-    key: KeyEvent,
-    pending: &mut Pending,
-) -> Option<Action> {
+pub fn map_key(overlay: Overlay, key: KeyEvent, pending: &mut Pending) -> Option<Action> {
     match overlay {
         Overlay::Help => map_help(key, pending),
-        Overlay::Search => map_search(key),
-        Overlay::None => match mode {
-            Mode::Navigation => map_navigation(key, pending),
-            Mode::Inspect => map_inspect(key, pending),
-        },
+        Overlay::None => map_tree(key, pending),
     }
 }
 
@@ -56,19 +47,13 @@ fn map_help(key: KeyEvent, pending: &mut Pending) -> Option<Action> {
     }
 }
 
-fn map_search(key: KeyEvent) -> Option<Action> {
-    match key.code {
-        KeyCode::Esc => Some(Action::SearchCancel),
-        KeyCode::Enter => Some(Action::SearchConfirm),
-        KeyCode::Backspace => Some(Action::SearchBackspace),
-        KeyCode::Char(c) => Some(Action::SearchInput(c)),
-        _ => None,
+fn map_tree(key: KeyEvent, pending: &mut Pending) -> Option<Action> {
+    // The `gg` chord -> modern form.
+    if let Some(action) = map_g_chord(key, pending) {
+        return Some(action);
     }
-}
 
-/// Handle keys common to Navigation and Inspect (overlay = None).
-fn map_common(key: KeyEvent, pending: &mut Pending) -> Option<Action> {
-    // Numeric count prefix (but a lone 0 is not a count).
+    // Numeric count prefix (but a lone 0 jumps to the modern form).
     if let KeyCode::Char(c @ '0'..='9') = key.code {
         if !(c == '0' && pending.count.is_none()) {
             let digit = c as u32 - '0' as u32;
@@ -78,98 +63,41 @@ fn map_common(key: KeyEvent, pending: &mut Pending) -> Option<Action> {
     }
 
     match key.code {
-        KeyCode::Char('q') => {
+        // Older / right.
+        KeyCode::Char('l') | KeyCode::Right => Some(Action::Move(pending.take_count())),
+        // Newer / left.
+        KeyCode::Char('h') | KeyCode::Left => Some(Action::Move(-pending.take_count())),
+        // Line-start / line-end vim motions map onto the chain ends.
+        KeyCode::Char('0') | KeyCode::Home => {
             pending.clear();
-            Some(Action::Quit)
+            Some(Action::JumpModern)
         }
-        KeyCode::Char('?') => {
+        KeyCode::Char('$') | KeyCode::Char('G') | KeyCode::End => {
             pending.clear();
-            Some(Action::ToggleHelp)
-        }
-        KeyCode::Char('s') => {
-            pending.clear();
-            Some(Action::ToggleStats)
-        }
-        KeyCode::Char('/') => {
-            pending.clear();
-            Some(Action::SearchStart)
-        }
-        KeyCode::Char('r') => {
-            pending.clear();
-            Some(Action::Random)
-        }
-        KeyCode::Char('n') => {
-            pending.clear();
-            Some(Action::SearchNext)
-        }
-        KeyCode::Char('N') => {
-            pending.clear();
-            Some(Action::SearchPrev)
-        }
-        _ => None,
-    }
-}
-
-fn map_navigation(key: KeyEvent, pending: &mut Pending) -> Option<Action> {
-    // The `gg` chord.
-    if let Some(action) = map_g_chord(key, pending) {
-        return Some(action);
-    }
-    match key.code {
-        KeyCode::Char('j') | KeyCode::Down => Some(Action::Move(pending.take_count())),
-        KeyCode::Char('k') | KeyCode::Up => Some(Action::Move(-pending.take_count())),
-        KeyCode::Char('G') => {
-            pending.clear();
-            Some(Action::JumpEnd)
-        }
-        KeyCode::Enter | KeyCode::Char('l') | KeyCode::Right => {
-            pending.clear();
-            Some(Action::Open)
-        }
-        KeyCode::Esc => {
-            pending.clear();
-            None
-        }
-        _ => map_common(key, pending),
-    }
-}
-
-fn map_inspect(key: KeyEvent, pending: &mut Pending) -> Option<Action> {
-    // The `gg` chord -> oldest origin.
-    if let Some(action) = map_g_chord(key, pending) {
-        return Some(action);
-    }
-    match key.code {
-        // Deeper into history (older).
-        KeyCode::Char('h') | KeyCode::Char('j') | KeyCode::Left | KeyCode::Down => {
-            Some(Action::Move(pending.take_count()))
-        }
-        // Back toward modern.
-        KeyCode::Char('l') | KeyCode::Char('k') | KeyCode::Right | KeyCode::Up => {
-            Some(Action::Move(-pending.take_count()))
-        }
-        KeyCode::Char('G') => {
-            pending.clear();
-            Some(Action::JumpEnd)
+            Some(Action::JumpRoot)
         }
         KeyCode::Char(' ') => {
             pending.clear();
             Some(Action::ToggleAutoplay)
         }
-        KeyCode::Esc => {
+        KeyCode::Char('?') => {
             pending.clear();
-            Some(Action::Back)
+            Some(Action::ToggleHelp)
         }
-        _ => map_common(key, pending),
+        KeyCode::Char('q') | KeyCode::Esc => {
+            pending.clear();
+            Some(Action::Quit)
+        }
+        _ => None,
     }
 }
 
-/// Handle the `gg` chord. Returns `Some(JumpStart)` on the second `g`.
+/// Handle the `gg` chord. Returns `Some(JumpModern)` on the second `g`.
 fn map_g_chord(key: KeyEvent, pending: &mut Pending) -> Option<Action> {
     if key.code == KeyCode::Char('g') && !key.modifiers.contains(KeyModifiers::SHIFT) {
         if pending.g {
             pending.clear();
-            return Some(Action::JumpStart);
+            return Some(Action::JumpModern);
         }
         pending.g = true;
         return None;
@@ -188,81 +116,82 @@ mod tests {
     }
 
     #[test]
-    fn count_prefix_multiplies_movement() {
+    fn h_is_newer_l_is_older() {
         let mut p = Pending::default();
         assert_eq!(
-            map_key(Mode::Navigation, Overlay::None, k('3'), &mut p),
-            None
-        );
-        assert_eq!(
-            map_key(Mode::Navigation, Overlay::None, k('j'), &mut p),
-            Some(Action::Move(3))
-        );
-        // Count is consumed.
-        assert_eq!(
-            map_key(Mode::Navigation, Overlay::None, k('j'), &mut p),
-            Some(Action::Move(1))
-        );
-    }
-
-    #[test]
-    fn gg_chord_jumps_to_start() {
-        let mut p = Pending::default();
-        assert_eq!(
-            map_key(Mode::Navigation, Overlay::None, k('g'), &mut p),
-            None
-        );
-        assert!(p.g);
-        assert_eq!(
-            map_key(Mode::Navigation, Overlay::None, k('g'), &mut p),
-            Some(Action::JumpStart)
-        );
-        assert!(!p.g);
-    }
-
-    #[test]
-    fn inspect_h_is_deeper_l_is_shallower() {
-        let mut p = Pending::default();
-        assert_eq!(
-            map_key(Mode::Inspect, Overlay::None, k('h'), &mut p),
+            map_key(Overlay::None, k('l'), &mut p),
             Some(Action::Move(1))
         );
         assert_eq!(
-            map_key(Mode::Inspect, Overlay::None, k('l'), &mut p),
+            map_key(Overlay::None, k('h'), &mut p),
             Some(Action::Move(-1))
         );
     }
 
     #[test]
-    fn search_overlay_captures_typing() {
+    fn count_prefix_multiplies_movement() {
         let mut p = Pending::default();
+        assert_eq!(map_key(Overlay::None, k('3'), &mut p), None);
         assert_eq!(
-            map_key(Mode::Navigation, Overlay::Search, k('a'), &mut p),
-            Some(Action::SearchInput('a'))
+            map_key(Overlay::None, k('l'), &mut p),
+            Some(Action::Move(3))
         );
+        // Count is consumed.
         assert_eq!(
-            map_key(
-                Mode::Navigation,
-                Overlay::Search,
-                KeyEvent::new(KeyCode::Esc, KeyModifiers::NONE),
-                &mut p
-            ),
-            Some(Action::SearchCancel)
+            map_key(Overlay::None, k('l'), &mut p),
+            Some(Action::Move(1))
         );
     }
 
     #[test]
-    fn lone_zero_is_not_a_count() {
+    fn gg_chord_jumps_to_modern() {
         let mut p = Pending::default();
-        // 0 with no pending count is unbound, not a count.
+        assert_eq!(map_key(Overlay::None, k('g'), &mut p), None);
+        assert!(p.g);
         assert_eq!(
-            map_key(Mode::Navigation, Overlay::None, k('0'), &mut p),
-            None
+            map_key(Overlay::None, k('g'), &mut p),
+            Some(Action::JumpModern)
         );
-        assert_eq!(p.count, None);
-        // But 1 then 0 makes 10.
-        map_key(Mode::Navigation, Overlay::None, k('1'), &mut p);
-        map_key(Mode::Navigation, Overlay::None, k('0'), &mut p);
+        assert!(!p.g);
+    }
+
+    #[test]
+    fn capital_g_and_dollar_jump_to_root() {
+        let mut p = Pending::default();
+        assert_eq!(
+            map_key(Overlay::None, k('G'), &mut p),
+            Some(Action::JumpRoot)
+        );
+        assert_eq!(
+            map_key(Overlay::None, k('$'), &mut p),
+            Some(Action::JumpRoot)
+        );
+    }
+
+    #[test]
+    fn lone_zero_jumps_to_modern_but_extends_a_count() {
+        let mut p = Pending::default();
+        assert_eq!(
+            map_key(Overlay::None, k('0'), &mut p),
+            Some(Action::JumpModern)
+        );
+        // 1 then 0 makes a count of 10, not a jump.
+        map_key(Overlay::None, k('1'), &mut p);
+        assert_eq!(map_key(Overlay::None, k('0'), &mut p), None);
         assert_eq!(p.count, Some(10));
+    }
+
+    #[test]
+    fn q_and_esc_quit() {
+        let mut p = Pending::default();
+        assert_eq!(map_key(Overlay::None, k('q'), &mut p), Some(Action::Quit));
+        assert_eq!(
+            map_key(
+                Overlay::None,
+                KeyEvent::new(KeyCode::Esc, KeyModifiers::NONE),
+                &mut p
+            ),
+            Some(Action::Quit)
+        );
     }
 }
