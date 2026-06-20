@@ -1,58 +1,58 @@
 # origin
 
 A terminal time machine for word origins. Run `origin <word>` and it opens a
-**horizontal etymology tree** for that word — modern form on the left, ancient
-root on the right — that you walk back through time with Vim-style keys.
+**horizontal etymology tree** — modern form on the left, ancient root on the
+right — that you walk back through time with Vim-style keys.
 
 ```
- ORIGIN                   h:newer  l:older  gg:modern  G:root  Space:play  ?:help  q:quit
-┌ Salary ───────────────────────────────────────────────────────────────────────────────┐
-│                                                                                         │
-│  ╭────────╮     ╭────────╮     ╭────────╮     ╭────────╮     ╭────────╮                 │
-│  │ salary │ ──▶ │salarie │ ──▶ │salarium│ ──▶ │  sal   │ ──▶ │ *sal-  │                 │
-│  ╰────────╯     ╰────────╯     ╰────────╯     ╰────────╯     ╰────────╯                 │
-│   English       OldFrench        Latin          Latin        Proto-IE                   │
-│    modern       c. 1300 CE     c. 100 BCE     Old Latin       PIE root                  │
-│                                                                                         │
-└─────────────────────────────────────────────────────────────────────────────────────┘
-┌ Stage ────────────────────────────────────────────────────────────────────────────────┐
-│ Form: salarium    Language: Latin    Period: c. 100 BCE                                  │
-│ Meaning  Soldier's allowance, originally money for salt.                                 │
-│ stage 3/5                                                                                │
-└─────────────────────────────────────────────────────────────────────────────────────┘
+ origin                                                    ?:help  q:quit
+
+   salary   ──▶  salarie  ──▶  salarium  ──▶    sal    ──▶   *sal-
+   English       OldFrench       Latin           Latin       Proto-IE
+   modern        c.1300 CE    c.100 BCE        Old Latin     PIE root
+
+┌ Stage ──────────────────────────────────────────────────────────────────┐
+│ Form: salary    Language: English    Period: modern                      │
+│                                                                          │
+│ Meaning  Fixed periodic wage.                                            │
+│                                                                          │
+│ stage 1/5                                                                │
+└──────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Run
 
 ```sh
 origin salary          # trace a word's etymology
+origin disaster        # English → Italian → Latin → Greek → PIE
+origin muscle          # English → French → Latin → Latin → PIE ("little mouse")
 cargo run -- salary    # from a checkout
 ```
 
 Running with no word prints usage; an unknown word prints close matches and
 exits.
 
-### Options
-
-| Flag             | Description                                  |
-|------------------|----------------------------------------------|
-| `--data <PATH>`  | Load an external `words.json` dataset.       |
-| `--no-mouse`     | Disable mouse capture.                        |
-| `--log <PATH>`   | Write logs to a file.                         |
-
 ## Controls
 
-| Keys                | Action                                          |
-|---------------------|-------------------------------------------------|
-| `l` / `→`           | step back in time (older form)                  |
-| `h` / `←`           | step forward (newer form)                       |
-| `gg` / `0`          | jump to the modern word                         |
-| `G` / `$`           | jump to the oldest root                         |
-| `Space`             | play / pause backward auto-traversal            |
-| `3l`                | numeric counts repeat a motion                  |
-| mouse               | click a node, scroll to navigate                |
-| `?`                 | toggle help                                     |
-| `q` / `Esc`         | quit                                            |
+| Keys                | Action                                         |
+|---------------------|------------------------------------------------|
+| `l` / `→`           | step back in time (older form)                 |
+| `h` / `←`           | step forward (newer form)                      |
+| `gg` / `0`          | jump to the modern word                        |
+| `G` / `$`           | jump to the oldest root                        |
+| `Space`             | play / pause backward auto-traversal           |
+| `3l`                | numeric counts repeat a motion                 |
+| mouse               | click a node, scroll to navigate               |
+| `?`                 | toggle help                                    |
+| `q` / `Esc`         | quit                                           |
+
+## Options
+
+| Flag             | Description                           |
+|------------------|---------------------------------------|
+| `--data <PATH>`  | Load an external `words.json` dataset |
+| `--no-mouse`     | Disable mouse capture                 |
+| `--log <PATH>`   | Write logs to a file                  |
 
 ## Data format
 
@@ -74,22 +74,7 @@ A full dataset is embedded in the binary, so the file is optional.
 ]
 ```
 
-`sort_key` is a signed year (negative = BCE) used to compare depth across words.
-
-## Layout
-
-```
-src/
-  model/   domain types, dataset loading and word resolution
-  input/   Action intents and the Vim keymap
-  app.rs   state machine: update(Action) drives all state
-  ui/      ratatui rendering (tree, detail, status, help)
-  tui.rs   terminal setup, teardown, panic safety
-  main.rs  argument parsing, word resolution and the event loop
-```
-
-Keys and mouse events become `Action` values, and `App::update` is the single
-place state changes — so the logic is testable without a terminal.
+`sort_key` is a signed year (negative = BCE).
 
 ## Development
 

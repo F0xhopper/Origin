@@ -37,7 +37,7 @@ fn try_main() -> Result<ExitCode> {
     // No word given: print usage-style guidance and exit.
     let Some(query) = cli.word.as_deref() else {
         eprintln!("usage: origin <word>");
-        eprintln!("       e.g. `origin salary` to trace a word's etymology.");
+        eprintln!("       e.g. `origin salary`, `origin disaster`, `origin muscle`");
         return Ok(ExitCode::from(2));
     };
 
@@ -95,7 +95,7 @@ fn report_not_found(dataset: &Dataset, query: &str) {
         eprintln!("did you mean: {}?", suggestions.join(", "));
     } else {
         eprintln!(
-            "try `origin salary` — the dataset covers {} words.",
+            "try `origin disaster`, `origin muscle`, or `origin salary` — the dataset covers {} words.",
             dataset.len()
         );
     }
